@@ -1,45 +1,64 @@
-{% block html_head_container %}
-
 {% include 'html-header.twig' %}
-	{% block head %}
-	{% endblock %}
-	</head>
+{% block header %}{% endblock %}</head><body class="{{body_class}}" data-template="base.twig">
+<header class="header">
+  <div class="wrapper">
+    <section class="logo uppercase center">
+      <a href="/">
+        <div class="logo__image"></div>
+      </a>
+    </section>
+    <nav class="nav uppercase center">
+      <a href="/blog" onclick="gtag('event', 'nav-click', { 'event_category' : 'top-nav', 'event_label' : 'blog' });">Blog</a>
+      <a href="/about" onclick="gtag('event', 'nav-click', { 'event_category' : 'top-nav', 'event_label' : 'about' });">About</a>
+      <!--<a href="/resources">Tools</a>-->
+    </nav>
+  </div>
+  {% if homepage %}
+    <section class="hp-hero">
+      <div class="wrapper">
+        <div class="hp-hero__content">
+          <h1 class="hp-hero__headline">
+            WRITE CODE TODAY!
+          </h1>
+          <div class="hp-hero__subheadline">
+            <h2>
+              Easy to follow and high-quality development guides.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+</header>
+
+{% block content %}
+  Sorry, no content
 {% endblock %}
 
-	<body class="{{body_class}}" data-template="base.twig">
-		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
-		<header class="header" >
-			{% block header %}
-				<div class="wrapper">
-					<h1 class="hdr-logo" role="banner">
-						<a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
-					</h1>
-					<nav id="nav-main" class="nav-main" role="navigation">
-						{% include "menu.twig" with {'menu': menu.get_items} %}
-					</nav><!-- #nav -->
-				</div>
-			{% endblock %}
-		</header>
-
-		<section id="content" role="main" class="content-wrapper">
-			{% if title %}<h1>{{title}}</h1>{% endif %}
-			<div class="wrapper {{sidebar_class}}">
-				{% block content %}
-					Sorry, no content
-				{% endblock %}
-			</div>
-			{% if sidebar %}
-				<aside class="layout-sidebar">
-					{{sidebar}}
-				</aside>
-			{% endif %}
-		</section>
-
-		{% block footer %}
-			<footer id="footer">
-				{% include 'footer.twig' %}
-			</footer>
-			{{ function('wp_footer') }}
-		{% endblock %}
-	</body>
+{% include 'footer.twig' %}
+{{ function('wp_footer') }}
+{% block footer %}{% endblock %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+		window.addEventListener("load", function(){
+		window.cookieconsent.initialise({
+			"palette": {
+				"popup": {
+				"background": "#333333",
+				"text": "#ffffff"
+				},
+				"button": {
+				"background": "#38a6ff",
+				"text": "#ffffff"
+				}
+			},
+			"content": {
+				"message": "Our website uses cookies to make your browsing experience better. By using our site you agree to our use of cookies.",
+				"dismiss": "Got it!",
+				"link": "Learn more here.",
+				"href": "/privacy-policy"
+			}
+		})});
+</script>
+</body>
 </html>

@@ -14,10 +14,13 @@
  */
 
 $context = Timber::context();
-$context['posts'] = new Timber\PostQuery();
-$context['foo'] = 'bar';
-$templates = array( 'index.twig' );
-if ( is_home() ) {
-	array_unshift( $templates, 'front-page.twig', 'home.twig' );
-}
-Timber::render( $templates, $context );
+$context['homepage'] = true;
+
+$context['helpful_posts'] = Timber::get_posts(array('posts_per_page' => 9, 'category_name' => 'helpful-resources', 'orderby' => 'post_modified'));
+
+$context['recent_posts'] = Timber::get_posts(array('posts_per_page' => 9, 'orderby' => 'post_modified'));
+
+// print($context['recent_posts'][0]->preview->length(50));
+
+$templates = array('index.twig');
+Timber::render($templates, $context);

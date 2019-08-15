@@ -1,5 +1,6 @@
-jQuery( document ).ready( function( $ ) {
+window.addEventListener("load", function () {
+  var post = document.querySelector('#post');
+  var title = post.children[0].innerText;
 
-  // Your JavaScript goes here
-
+  console.log(post);
 });

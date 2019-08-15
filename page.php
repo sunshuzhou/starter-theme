@@ -23,6 +23,23 @@
 
 $context = Timber::context();
 
+// Sidebar articles
+
 $timber_post = new Timber\Post();
-$context['post'] = $timber_post;
-Timber::render( array( 'page-' . $timber_post->post_name . '.twig', 'page.twig' ), $context );
+if ($timber_post->slug != 'blog') {
+  $context['post'] = $timber_post;
+  $context['popular_articles'] = Timber::get_posts(array('category_name' => 'popular', 'posts_per_page' => 3));
+
+  Timber::render('single.twig', $context);
+} else {
+
+  if (!isset($paged) || !$paged) {
+    $paged = 1;
+  }
+
+  $context['helpful_term'] = new Timber\Term('helpful-resources');
+
+  $context['posts'] = new Timber\PostQuery(array('posts_per_page' => 9, 'paged' => $paged, 'orderby' => 'post_modified'));
+  // print_r($context['posts']);
+  Timber::render('blog.twig', $context);
+}

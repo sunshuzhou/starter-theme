@@ -1,39 +1,67 @@
 {% extends "base.twig" %}
 
-{% block content %}
-	<div class="content-wrapper">
-		<article class="post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
-			<img src="{{ post.thumbnail.src|resize(1200, 300) }}">
-			<section class="article-content">
-				<h1 class="article-h1">{{ post.title }}</h1>
-				<a href="{{ post.link }}">{{ _e('edit') }}</a>
-				<p class="blog-author">
-					<span>By</span><a href="{{post.author.path}}"> {{ post.author.name }} </a><span>&bull;</span> {{ post.date }}
-				</p>
-				<div class="article-body">
-					{{post.content}}
-				</div>
-			</section>
-
-			<!-- comment box -->
-			<section class="comment-box">
-				<!-- comments -->
-				<div class="comments">
-				    {% if post.comments %}
-					<h3> comments </h3>
-					{% for cmt in post.comments %}
-					    {% include "comment.twig" with {comment:cmt} %}
-					{% endfor %}
-				    {% endif %}
-				</div>
-
-				{% if post.comment_status == "closed" %}
-					<p> comments for this post are closed </p>
-				{% else %}
-				    <!-- comment form -->
-				    {% include "comment-form.twig" %}
-				{% endif %}
-			</section>
-		</article>
-	</div><!-- /content-wrapper -->
+{% block header %}
+  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css" integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" rel="stylesheet" />
 {% endblock %}
+
+{% block content %}
+  <main role="main">
+    <article
+      class="flex-container wrapper">
+      <!-- Hero & Post Wrapper -->
+      <div
+        class="content">
+        <!-- Hero -->
+        {% if post.thumbnail.src %}
+          <section class="hero">
+            <img class="hero__image" alt="post-css-position" src="{{post.thumbnail.src}}">
+          </section>
+        {% endif %}
+
+        <!-- Post Content -->
+        {% if post.type == 'page' %}
+          <section class="post post__page" id="post">
+          {% else %}
+            <section class="post" id="post">
+            {% endif %}
+
+
+            <h1>{{post.title}}</h1>
+            {% if post.type != 'page' %}
+              <div class="post__meta">
+                Last updated on
+                {{post.modified_date}}
+                at
+                {{post.modified_time}}, by
+                {{post.author}}
+              </div>
+            {% endif %}
+
+            <div class="post__content">
+              {{post.content}}
+            </div>
+
+          </section>
+
+          {% if post.type == 'post' %}
+            <section class="comments" id="comments">
+              <header>
+                <h3>Comments</h3>
+              </header>
+
+              {{ function('comments_template') }}
+            </section>
+          {% endif %}
+        </div>
+        {% include 'sidebar.twig' %}
+      </article>
+    </main>
+  {% endblock %}
+
+  {% block footer %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js" integrity="sha256-NFZVyNmS1YlmiklazBA+TALYJlJtZj/y/i/oADk6CVE=" crossorigin="anonymous"></script>
+
+    {% if post.type == 'post' %}
+      <script src="{{theme.link}}/static/site.js"></script>
+    {% endif %}
+  {% endblock %}

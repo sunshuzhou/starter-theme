@@ -1,0 +1,14 @@
+<section class="hp-featured">
+  <header class="hp-grid__title">🎉 Awesome Tutorials</header>
+  <div class="hp-grid">
+    {% for post in helpful_posts %}
+      <div class="grid-item featured">
+        <a href="{{post.link}}" onclick="gtag('event', 'homepage-click', { 'event_category' : 'featured', 'event_label' : '{{post.slug}}' });">
+          <div class="grid-item__content" style="background-image: url('{{post.thumbnail.src}}')">
+            <header>{{post.title}}</header>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,42 @@
+{% extends "base.twig" %}
+
+
+{% block content %}
+<main>
+<section class="archive__posts">
+    <header class="hp-grid__title">Blog Posts</header>
+
+    <div class="archive__grid">
+      {% for post in posts %}
+        <a href="{{post.link}}" class="archive__post">        
+          <div class="archive__post-image" style="background-image:url('{{post.thumbnail.src}}')"></div>
+          <div class="archive__post-content">
+              <h2>{{post.title}}</h2>
+              <p class="black">{{post.content|excerpt(30)}}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  <div class="pagination">
+    {% if posts.pagination.prev %}
+      <a href="{{posts.pagination.prev.link}}" class="prevnext prev">&lt; Prev</a>
+    {% endif %}
+
+    <ul>
+      {% for page in posts.pagination.pages %}
+        <li>
+          {% if page.link %}
+            <a href="{{page.link}}" class="page-number page-numbers">{{page.title}}</a>
+          {% else %}
+            <span class="page-number page-numbers current">{{page.title}}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% if posts.pagination.next %}
+    <a href="{{posts.pagination.next.link}}" class="prevnext next">Next &gt;</a>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}

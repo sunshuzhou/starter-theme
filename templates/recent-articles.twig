@@ -1,0 +1,26 @@
+<section class="hp-content">
+  <header class="hp-grid__title">🎁 Recent Posts</header>
+  <section class="hp-grid">
+    {% for post in recent_posts %}
+      <article class="grid-item">
+			  <a href="{{post.link}}" onclick="gtag('event', 'homepage-click', { 'event_category' : 'post-grid', 'event_label' : '{{post.slug}}' });">
+						<div class="grid-item__content">
+							<div class="grid-item__image -featured" style="background-image: url(&quot;{{post.thumbnail.src}}&quot;); height: 195px;"></div>
+							<div class="grid-item__text">
+								<header class="grid-item__title">
+									<h2 class="black">{{post.title}}</h2>
+									<!--<span class="author">by Jessica Chan</span>-->
+								</header>
+								<p class="black">{{post.content|excerpt(30)}}</p>
+								<span class="readmore">Read More &nbsp; ⏩</span>
+							</div>
+						</div>
+			  </a>
+		  </article>	
+    {% endfor %}
+	</section>
+			
+  <section class="allposts">
+    <a href="/blog" onclick="gtag('event', 'homepage-click', { 'event_category' : 'post-grid', 'event_label' : 'all-posts' });">See all posts &gt;</a>
+  </section>
+</section>
