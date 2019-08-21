@@ -1,5 +1,7 @@
 {% include 'html-header.twig' %}
-{% block header %}{% endblock %}</head><body class="{{body_class}}" data-template="base.twig">
+{% block header %}{% endblock %}
+</head>
+<body class="{{body_class}}" data-template="base.twig">
 <header class="header">
   <div class="wrapper">
     <section class="logo uppercase center">
@@ -41,24 +43,25 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
 <script>
 		window.addEventListener("load", function(){
-		window.cookieconsent.initialise({
-			"palette": {
-				"popup": {
-				"background": "#333333",
-				"text": "#ffffff"
-				},
-				"button": {
-				"background": "#38a6ff",
-				"text": "#ffffff"
-				}
-			},
-			"content": {
-				"message": "Our website uses cookies to make your browsing experience better. By using our site you agree to our use of cookies.",
-				"dismiss": "Got it!",
-				"link": "Learn more here.",
-				"href": "/privacy-policy"
-			}
-		})});
+      window.cookieconsent.initialise({
+        "palette": {
+          "popup": {
+          "background": "#333333",
+          "text": "#ffffff"
+          },
+          "button": {
+          "background": "#38a6ff",
+          "text": "#ffffff"
+          }
+        },
+        "content": {
+          "message": "Our website uses cookies to make your browsing experience better. By using our site you agree to our use of cookies.",
+          "dismiss": "Got it!",
+          "link": "Learn more here.",
+          "href": "/privacy-policy"
+        }
+      })
+    });
 </script>
 </body>
 </html>

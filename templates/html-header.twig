@@ -2,14 +2,17 @@
 <!--[if lt IE 9]><html class="no-js no-svg ie lt-ie9 lt-ie8 lt-ie7" {{ site.language_attributes }}> <![endif]-->
 <!--[if IE 9]><html class="no-js no-svg ie ie9 lt-ie9 lt-ie8" {{ site.language_attributes }}> <![endif]-->
 <!--[if gt IE 9]><!-->
-  <html
-  class="no-js no-svg" {{ site.language_attributes }}> <!--<![endif]-->
+<html class="no-js no-svg" {{ site.language_attributes }}> <!--<![endif]-->
   <head>
     <meta
     charset="{{ site.charset }}"/>
     {# Google Fonts #}
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:500|Dosis:600|Roboto:400,500,700" rel="stylesheet">
+    
+    {% if not post %}
     <meta name="description" content="{{ site.description }}">
+    {% endif %}
+
     <link rel="stylesheet" href="{{ site.theme.link }}/style.css" type="text/css" media="screen"/>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -20,15 +23,13 @@
     <link
     rel="pingback" href="{{ site.pingback_url }}"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137928861-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137928861-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'UA-137928861-1');
+      gtag('config', 'UA-137928861-2');
     </script>
     {{ function('wp_head') }}
     {# TODO: ADD icon #}

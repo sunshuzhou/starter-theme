@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block header %}
-  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css" integrity="sha256-77qGXu2p8NpfcBpTjw4jsMeQnz0vyh74f5do0cWjQ/Q=" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.min.css" />
 {% endblock %}
 
 {% block content %}
@@ -59,8 +59,7 @@
   {% endblock %}
 
   {% block footer %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js" integrity="sha256-NFZVyNmS1YlmiklazBA+TALYJlJtZj/y/i/oADk6CVE=" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script>
     {% if post.type == 'post' %}
       <script src="{{theme.link}}/static/site.js"></script>
     {% endif %}

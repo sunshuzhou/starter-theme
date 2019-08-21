@@ -10,4 +10,5 @@
  */
 
 $context = Timber::context();
+$context['popular_articles'] = Timber::get_posts(array('category_name' => 'popular', 'posts_per_page' => 3));
 Timber::render( '404.twig', $context );
